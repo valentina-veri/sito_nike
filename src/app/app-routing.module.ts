@@ -7,8 +7,7 @@ import { CategorieScarpeComponent } from './components/categorie-scarpe/categori
 import { NuoviArriviComponent } from './components/nuovi-arrivi/nuovi-arrivi.component';
 import { BestSellerComponent } from './components/best-seller/best-seller.component';
 import { CarrelloComponent } from './components/carrello/carrello.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { ThankYouPageComponent } from './components/thank-you-page/thank-you-page.component';
+import { CheckoutComponent } from './components/checkout/checkout.component'
 
 
 const routes: Routes = [
@@ -19,8 +18,7 @@ const routes: Routes = [
   {path:'nuovi-arrivi', component:NuoviArriviComponent},
   {path:'best-seller', component:BestSellerComponent},
   {path:'carrello', component:CarrelloComponent},
-  {path:'checkout', component:CheckoutComponent},
-  {path:'thank-you-page',component:ThankYouPageComponent}
+  {path:'checkout', component:CheckoutComponent}
 ];
 
 @NgModule({
