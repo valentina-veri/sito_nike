@@ -1,0 +1,78 @@
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-lg-6 mt-3">
+            <div class="card">
+                <img [src]="scarpa.immagine" class="card-img-top" alt="...">
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-6 mt-3">
+            <div class="card-body margin">
+                <h3 class="card-title mb-2">{{scarpa.nome}}</h3>
+                <p class="card-text">{{scarpa.descrizione}}</p>
+                <p class="card-tex">{{scarpa.prezzo | currency:"EUR"}}</p>
+            </div>
+
+            <div class="mt-5">
+                <h5 class="margin">Seleziona il colore</h5>
+                <ul class="row" [ngClass]="{'bordoRosso':messaggioSpanColore}">
+                    <li class="col-lg-4" *ngFor="let colore of scarpa.colori_disponibili, let i=index" (click)="selezionaColore(i)" [ngClass]="{'scelta':IndexColore==i}">{{colore}}</li>
+                </ul>
+                <span class="messaggioErrore" *ngIf="messaggioSpanColore">Seleziona un colore</span>
+            </div>
+
+            <div class="mt-5">
+                <h5 class="margin">Seleziona la taglia</h5>
+                <ul class="row" [ngClass]="{'bordoRosso':messaggioSpanTaglia}">
+                    <li class="col-lg-4" *ngFor="let taglia of scarpa.taglie_disponibili, let i= index" (click)="selezionaTaglia(i)" [ngClass]="{'scelta':IndexTaglia==i}">{{taglia}}</li>
+                </ul>
+                <span class="messaggioErrore" *ngIf="messaggioSpanTaglia">Seleziona la taglia</span>
+            </div>
+            <div class="d-grid gap-2 mt-3 mb-3">
+                <button class="btn btn-dark margin" type="button" data-bs-toggle="modal" data-bs-target="#popup" (click)="aggiungiAlCarrello()">
+                    Aggiungi al carrello</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!--Modal -->
+<div *ngIf="tagliaSelezionata&&coloreSelezionato" class="modal fade" id="popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Aggiunto al carrello</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-6 mt-3">
+                            <div class="card">
+                                <img [src]="scarpa.immagine" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-6 mt-3">
+                            <div class="card-body margin">
+                                <h3 class="card-title mb-2">
+                                    {{scarpa.nome}}</h3>
+                                <p class="card-tex">{{scarpa.
+                                    prezzo |
+                                    currency:"EUR"}}</p>
+                                    <p class="card-tex">Colore: {{scarpa.colori_disponibili[IndexColore]}}</p>
+                                    <p class="card-tex">Taglia: {{scarpa.taglie_disponibili[IndexTaglia]}}</p>               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-dark" routerLink="/carrello" role="button" data-bs-dismiss="modal">Visualizza carrello</a>
+                <a class="btn btn-dark" routerLink="/checkout" role="button" data-bs-dismiss="modal">Pagamento</a>
+            </div>
+        </div>
+    </div>
+</div>

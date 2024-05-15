@@ -1,0 +1,65 @@
+a {
+    color: black;
+}
+
+a:hover {
+    color: rgb(129, 129, 129);
+}
+
+#linkdx li a {
+    font-size: 0.8em;
+}
+
+#img1 {
+    margin-right: 50px;
+}
+
+#nav1 {
+    padding: 0;
+}
+
+#nav1 li {
+    border-right: black solid 1px;
+}
+
+#nav1 li:last-child {
+    border-right: transparent;
+}
+
+
+#menu li a:hover {
+    border-bottom: 2px black solid;
+}
+
+#cuore {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.dropdown .dropdown-menu,
+.dropend.dropdown-menu {
+    display: none;
+}
+
+.dropdown:hover>.dropdown-menu,
+.dropend:hover>.dropdown-menu {
+    display: block;
+    margin-top: .125em;
+}
+
+.dropend {
+    margin-left: 9px;
+}
+
+#Modal a {
+    text-decoration: none;
+}
+
+@media screen and (min-width:991px) {
+    .dropend>.dropdown-menu {
+        margin-left: 0;
+        position: absolute;
+        top: 0;
+        left: 100%;
+    }
+}

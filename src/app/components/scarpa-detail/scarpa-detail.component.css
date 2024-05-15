@@ -1,0 +1,35 @@
+ul li {
+    width: 32%;
+    height: 40px;
+    margin: 2px;
+    border: solid 1px #c4c4c4;
+    cursor: pointer;
+    list-style: none;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+
+  }
+
+  ul li:hover {
+    border: solid 1px black;
+  }
+
+  .margin{
+    margin-left: 20px;
+  }
+
+  .messaggioErrore{
+    color: red;
+  }
+  
+  .bordoRosso{
+    border: 1px solid red;
+  }
+
+  .scelta{
+    background-color: #c4c4c4;
+  }
+  
+
+  

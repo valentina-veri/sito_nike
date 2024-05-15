@@ -1,0 +1,133 @@
+<div class="container">
+    <h2 class="mt-3">Tutti i nostri prodotti</h2>
+
+    <div class="row">
+        <div class="col-lg-3 mb-3">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseOne">
+                            Fascia di prezzo
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                                    [(ngModel)]="checkBoxPrezzo[0]" (change)="scarpeFiltratePerPrezzo()">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    50 euro - 100 euro
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2"
+                                    [(ngModel)]="checkBoxPrezzo[1]" (change)="scarpeFiltratePerPrezzo()">
+                                <label class="form-check-label" for="defaultCheck2">
+                                    100 euro - 150 euro
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck3"
+                                    [(ngModel)]="checkBoxPrezzo[2]" (change)="scarpeFiltratePerPrezzo()">
+                                <label class="form-check-label" for="defaultCheck3">
+                                    superiore a 150 euro
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseTwo">
+                            Colore
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            <!-- <div class="row row-cols-3">
+                                <div class="col" *ngFor="let c of listaColori()">
+                                   <button type="button" role="checkbox" class="btn colori" (click)="scarpeFiltratePerColore(c)">
+                                        <img [src]="'assets/img/'+c+'.png'" alt="">
+                                        <span>{{c}}</span>
+                                    </button>
+                                </div>-->
+                            <div class="form-check" *ngFor="let c of listaColori();let i= index">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck{{i}}"
+                                    [(ngModel)]="checkBoxColore[i]" (change)="scarpeFiltratePerColore()">
+                                <label class="form-check-label" for="defaultCheck{{i}}">
+                                    {{c}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseThree">
+                            Sport
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            <div class="form-check" *ngFor="let cat of listaCategorie();let i= index ">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck{{i}}"
+                                    [(ngModel)]="checkBoxCategoria[i]" (change)="scarpeFiltrateperCategoria()">
+                                <label class="form-check-label" for="defaultCheck{{i}}">
+                                    {{cat}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-9">
+            <div class="row">
+                <div class="col-sm-12 col-lg-4 mb-3" *ngFor="let p of prodottiFiltrati">
+                    <a [routerLink]="['/dettaglio-scarpa', p.id]">
+                        <div class="card h-100">
+                            <img [src]="p.immagine" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title">{{p.nome}}</h5>
+                                <p class="card-text">{{p.categoria}}</p>
+                                <p id="best-seller" class="card-text" *ngIf="p.best_seller>=4">
+                                    <strong> BEST SELLER</strong>
+                                </p>
+                                <i class="bi bi-star-fill" *ngIf="p.nuovo_arrivi==true"></i>
+                                <p>{{p.colori_disponibili}}</p>
+                                <p class="card-tex">{{p.prezzo | currency:"EUR"}}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!--<div class="row">
+                <div class="col-sm-12 col-lg-4 mb-3" *ngFor="let p of prodotti">
+                    <a [routerLink]="['/dettaglio-scarpa', p.id]">
+                        <div class="card h-100">
+                            <img [src]="p.immagine" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{p.nome}}</h5>
+                                <p class="card-text">{{p.categoria}}</p>
+                                <p id="best-seller" class="card-text" *ngIf="p. best_seller>=4"><strong>
+                                        BEST
+                                        SELLER</strong>
+                                </p>
+                                <i class="bi bi-star-fill" *ngIf="p.nuovo_arrivi==true"></i>
+                                <p class="card-tex">{{p.prezzo | currency:"EUR"}}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>

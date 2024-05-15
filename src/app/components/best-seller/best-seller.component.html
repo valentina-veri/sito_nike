@@ -1,0 +1,26 @@
+<div class="container">
+
+    <h1>Best Seller</h1>
+
+    <div class="row">
+
+        <div class="col-sm-12 col-lg-4 mb-3" *ngFor="let p of prodotti">
+            <a [routerLink]="['/dettaglio-scarpa', p.id]">
+                <div class="card h-100">
+                    <img [src]="p.immagine" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{p.nome}}</h5>
+                        <p class="card-text">{{p.categoria}}</p>
+                        <p id="best-seller" class="card-text" *ngIf="p.best_seller>=4"><strong> BEST SELLER</strong>
+                        </p>
+                        <i class="bi bi-star-fill" *ngIf="p.nuovo_arrivi==true"></i>
+                        <p class="card-text">{{p.descrizione}}</p>
+                        <p class="card-tex">{{p.prezzo |currency:"EUR"}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</div>

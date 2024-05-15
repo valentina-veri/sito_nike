@@ -1,0 +1,17 @@
+a {
+    text-decoration: none;
+}
+
+#best-seller {
+    color: rgb(235, 151, 91);
+}
+
+
+
+
+
+.accordion-body span{
+    color: black;
+    font-size: 0.8em;
+   font-weight: 600;
+}

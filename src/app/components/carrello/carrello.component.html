@@ -1,0 +1,57 @@
+<div class="container">
+
+    <div class="row mt-5">
+        <div class="col-lg-8">
+            <h2>Carrello</h2>
+            <div class="row">
+                <div class="mb-3" *ngFor="let p of prodottiAggiunti; let i = index">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-6 mt-3">
+                            <div class="card">
+                                <img [src]="p.immagine" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-6 mt-3">
+                            <div class="card-body margin">
+                                <h5 class="card-title mb-2">
+                                    {{p.nome}}</h5>
+                                <p class="card-tex">{{p.
+                                    prezzo |
+                                    currency:"EUR"}}</p>
+                                <p class="card-tex">
+                                    Taglia:{{p.taglie_disponibili[i]}}
+                                </p>
+                                <p class="card-tex">Colore:{{p.colori_disponibili[i]}}</p>
+                                <p class="card-tex">Quantità:</p>        
+                                <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="quantita[i]">                                  
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                                <button type="button" class="btn btn-danger mt-3"><i class="bi bi-trash" (click)="eliminaScarpa(i)"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <h2>Riepilogo</h2>
+            <div class="row">
+                <div class="col-6">
+                    <p>Subtotale</p>
+                    <p>Costi di spedizione</p>
+                    <p>Totale</p>
+                </div>
+                <div class="col-6 text-end">
+                    <p>{{costoTotale()|currency:'EUR'}}</p>
+                    <p>Gratis</p>
+                    <p>{{costoTotale()|currency:'EUR'}}</p>
+                </div>
+                <a class="btn btn-dark" routerLink="/checkout" role="button" data-bs-dismiss="modal">Pagamento</a>
+            </div>
+        </div>
+    </div>
+
+</div>

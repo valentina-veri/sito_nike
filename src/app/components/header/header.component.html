@@ -1,0 +1,112 @@
+<nav class="navbar bg-body-tertiary d-none d-lg-block" id="nav1">
+  <div class="container">
+    <a class="navbar-brand" routerLink="">
+      <img src="assets/img/icons8-air-jordan-50.png" alt="logo" width="25" height="25" id="img1">
+      <img src="assets/img/Converse_.png" alt="logo" width="25" height="25">
+    </a>
+    <ul class="nav justify-content-end" id="linkdx">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Trova un negozio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Aiuto</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Unisciti a noi</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Accedi</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="assets/img/logo.png" alt="logo" width="100" height="40">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="menu">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Novità e in evidenza
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/nuovi-arrivi">Tutti i nuovi arrivi</a></li>
+            <li><a class="dropdown-item" routerLink="/best-seller">Best seller</a></li>
+            <li class="nav-item dropend">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">Scopri lo sport</a>
+              <ul class="dropdown-menu border border-0">
+                <li><a class="dropdown-item" [routerLink]="['/prodotti', 'Sneakers']">Sneakers</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/prodotti', 'Running']">Running</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/prodotti', 'Basket']">Basket</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/prodotti', 'Trail Running']">Trail Running</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/prodotti', 'Training']">Training</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Uomo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Donna</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Kids</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Outlet</a>
+        </li>
+      </ul>
+        <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#Modal"> <i class="bi bi-search"></i> Cerca</button>
+      <a class="d-none d-lg-block" href=""><i style="font-size: 25px;" class="bi bi-heart" id="cuore"></i></a>
+      <a class="d-none d-lg-block" routerLink="/carrello"><i style="font-size: 25px;" class="bi bi-bag"></i></a>
+    </div>
+  </div>
+</nav>
+
+<!--Modal  -->
+<div class="modal fade" id="Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cerca per nome</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+          <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search" [(ngModel)]="termineRicerca" (input)="filtraProdotti()">
+        
+        <div class="container mt-3" *ngIf="termineRicerca.length>0">
+          <div class="row">
+              <div class="col-sm-12 col-lg-4 mb-3" *ngFor="let p of prodottiFiltrati">
+                  <a [routerLink]="['/dettaglio-scarpa', p.id]" data-bs-dismiss="modal" (click)="svuotaInput()">
+                      <div class="card h-100">
+                          <img [src]="p.immagine" class="card-img-top" alt="...">
+                          <div class="card-body">
+                              <h5 class="card-title">{{p.nome}}</h5>
+                              <p class="card-text">{{p.categoria}}</p>
+                              <p id="best-seller" class="card-text" *ngIf="p.best_seller>=4"><strong> BEST
+                                      SELLER</strong>
+                              </p>
+                              <i class="bi bi-star-fill" *ngIf="p.nuovo_arrivi==true"></i>
+                              <p class="card-text">{{p.descrizione}}</p>
+                              <p class="card-tex">{{p.prezzo | currency:"EUR"}}</p>
+                          </div>
+                      </div>
+                  </a>
+              </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

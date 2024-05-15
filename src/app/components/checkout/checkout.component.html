@@ -1,0 +1,252 @@
+<div class="container">
+
+    <div class="row mt-5">
+        <div class="col-lg-8">
+            <h3 class="mb-4">Opzioni di consegna</h3>
+            <div class="row mb-3">
+                <div class="col d-grid gap-2 col-6 mx-auto">
+                    <button type="button" class="btn btn-outline-dark"><i class="bi bi-truck"
+                            (click)="sceltaSpedizione()"></i>
+                        Spedizione</button>
+                </div>
+                <div class="col d-grid gap-2 col-6 mx-auto">
+                    <button type="button" class="btn btn-outline-dark" (click)="sceltaRitiro()"><i
+                            class="bi bi-geo-alt"></i>
+                        Ritiro</button>
+                </div>
+            </div>
+            <form [formGroup]="spedizione" *ngIf="buttonSpedizione">
+                <div class="row mb-3">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Nome" aria-label="Nome"
+                            formControlName="nome"
+                            [ngClass]="{'is-invalid':this.spedizione.get('nome')!.touched&&this.spedizione.get('nome')!.invalid}">
+                        <div *ngIf="spedizione.get('nome')!.errors&&spedizione.get('nome')!.touched">
+                            <span *ngIf="spedizione.get('nome')?.errors?.['required']" class="text-danger">Campo
+                                obbligatorio</span>
+                            <span *ngIf="spedizione.get('nome')?.errors?.['pattern']" class="text-danger">Campo non
+                                corretto</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Cognome" aria-label="Cognome"
+                            formControlName="cognome"
+                            [ngClass]="{'is-invalid':this.spedizione.get('cognome')!.touched&&this.spedizione.get('cognome')!.invalid}">
+                        <div *ngIf="spedizione.get('cognome')!.errors&&spedizione.get('cognome')!.touched">
+                            <span *ngIf="spedizione.get('cognome')?.errors?.['required']" class="text-danger">Campo
+                                obbligatorio</span>
+                            <span *ngIf="spedizione.get('cognome')?.errors?.['pattern']" class="text-danger">Campo non
+                                corretto</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Indirizzo" formControlName="indirizzo"
+                        [ngClass]="{'is-invalid':this.spedizione.get('indirizzo')!.touched&&this.spedizione.get('indirizzo')!.invalid}">
+                    <div *ngIf="spedizione.get('indirizzo')!.errors&&spedizione.get('indirizzo')!.touched">
+                        <span *ngIf="spedizione.get('indirizzo')?.errors?.['required']" class="text-danger">Campo
+                            obbligatorio</span>
+                        <span *ngIf="spedizione.get('indirizzo')?.errors?.['pattern']" class="text-danger">Campo non
+                            corretto</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="email" class="form-control" placeholder="E-mail" aria-label="E-mail"
+                            formControlName="email"
+                            [ngClass]="{'is-invalid':this.spedizione.get('email')!.touched&&this.spedizione.get('email')!.invalid}">
+                        <div *ngIf="spedizione.get('email')!.errors&&spedizione.get('email')!.touched">
+                            <span *ngIf="spedizione.get('email')?.errors?.['required']" class="text-danger">Campo
+                                obbligatorio</span>
+                            <span *ngIf="spedizione.get('email')?.errors?.['pattern']" class="text-danger">Campo non
+                                corretto</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <input type="tel" class="form-control" placeholder="Numero di telefono"
+                            aria-label="Numero di telefono" formControlName="telefono"
+                            [ngClass]="{'is-invalid':this.spedizione.get('telefono')!.touched&&this.spedizione.get('telefono')!.invalid}">
+                        <div *ngIf="spedizione.get('telefono')!.errors&&spedizione.get('telefono')!.touched">
+                            <span *ngIf="spedizione.get('telefono')?.errors?.['required']" class="text-danger">Campo
+                                obbligatorio</span>
+                            <span *ngIf="spedizione.get('telefono')?.errors?.['pattern']" class="text-danger">Campo non
+                                corretto</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                    <button class="btn btn-dark me-md-2" type="submit" [disabled]="spedizione.invalid"
+                        (click)="salvaEContinua=true">Salva e
+                        continua</button>
+                </div>
+            </form>
+            <form *ngIf="buttonRitiro">
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Indirizzo" [formControl]="ritiro"
+                        [ngClass]="{'is-invalid':this.ritiro!.touched&&this.ritiro!.invalid}">
+                    <div *ngIf="ritiro!.errors&&ritiro!.touched">
+                        <span *ngIf="ritiro?.errors?.['required']" class="text-danger">Campo
+                            obbligatorio</span>
+                        <span *ngIf="ritiro?.errors?.['pattern']" class="text-danger">Campo non corretto</span>
+                    </div>
+                </div>
+                <p>L'uso di una posizione specifica, come l'indirizzo di casa, permetterà di otimizzare l'accuratezza
+                    dei risultati</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end 
+                mt-3">
+                    <button class="btn btn-dark me-md-2" type="submit" [disabled]="ritiro.invalid"
+                        (click)="salvaEContinua=true">Salva e continua</button>
+                </div>
+            </form>
+            <div *ngIf="salvaEContinua">
+                <h3 class="mt-4 mb-4">Pagamento</h3>
+                <p>Paese/Regione di fatturazione:</p>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Italia</option>
+                    <option value="Francia">Francia</option>
+                    <option value="Germania">Germania</option>
+                    <option value="Spagna">Spagna</option>
+                </select>
+                <hr>
+                <p class="mt-3">Metodo di pagamento:</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio1" checked>
+                    <label class="form-check-label" for="radio1">
+                        Carta di credito o debito
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio2">
+                    <label class="form-check-label" for="radio2">
+                        PayPal
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio3">
+                    <label class="form-check-label" for="radio3">
+                        Google Pay
+                    </label>
+                </div>
+                <hr>
+                <p>Aggiungi carta</p>
+                <form [formGroup]="pagamento">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Numero di carta"
+                                aria-label="Numero di carta" formControlName="numeroCarta"
+                                [ngClass]="{'is-invalid':this.pagamento.get('numeroCarta')!.touched&&this.pagamento.get('numeroCarta')!.invalid}">
+                            <div *ngIf="pagamento.get('numeroCarta')!.errors&&pagamento.get('numeroCarta')!.touched">
+                                <span *ngIf="pagamento.get('numeroCarta')?.errors?.['required']"
+                                    class="text-danger">Campo obbligatorio</span>
+                                <span *ngIf="pagamento.get('numeroCarta')?.errors?.['pattern']"
+                                    class="text-danger">Campo non corretto</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="MM/AA" aria-label="MM/AA"
+                                formControlName="meseAnno" [ngClass]="{'is-invalid':this.pagamento.get('meseAnno')!.touched&&this.pagamento.get('meseAnno')!.
+                                invalid}">
+                            <div *ngIf="pagamento.get('meseAnno')!.errors&&pagamento.get('meseAnno')!.touched">
+                                <span *ngIf="pagamento.get('meseAnno')?.errors?.['required']" class="text-danger">Campo
+                                    obbligatorio</span>
+                                <span *ngIf="pagamento.get('meseAnno')?.errors?.['pattern']" class="text-danger">Campo
+                                    non corretto</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="CVV" aria-label="cvv"
+                                formControlName="cvv"
+                                [ngClass]="{'is-invalid':this.pagamento.get('cvv')!.touched&&this.pagamento.get('cvv')!.invalid}">
+                            <div *ngIf="pagamento.get('cvv')!.errors&&pagamento.get('cvv')!.touched">
+                                <span *ngIf="pagamento.get('cvv')?.errors?.['required']" class="text-danger">Campo
+                                    obbligatorio</span>
+                                <span *ngIf="pagamento.get('cvv')?.errors?.['pattern']" class="text-danger">Campo
+                                    non corretto</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 mb-3">
+                        <button class="btn btn-dark me-md-2" type="submit" [disabled]="pagamento.invalid"
+                            data-bs-toggle="modal" data-bs-target="#thankyou-page">Pagamento</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="row">
+                <div class="col-9">
+                    <h3 class="mb-3">Nel carrello</h3>
+                    <p>Subtotale</p>
+                    <p>Costi di spedizione</p>
+                    <p>Totale</p>
+                </div>
+                <div class="col-3 text-end">
+                    <a routerLink="/carrello">Modifica</a>
+                    <p class="pt-4">{{costoTotale()|currency:'EUR'}}</p>
+                    <p>Gratis</p>
+                    <p>{{costoTotale()|currency:'EUR'}}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-3" *ngFor="let p of prodottiAggiunti; let i = index">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-6 mt-3">
+                            <div class="card">
+                                <img [src]="p.immagine" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-6 mt-3">
+                            <div class="card-body margin">
+                                <h5 class="card-title mb-2">
+                                    {{p.nome}}</h5>
+                                <p class="card-tex">{{p.
+                                    prezzo |
+                                    currency:"EUR"}}</p>
+                                <p class="card-tex">
+                                    Taglia:{{p.taglie_disponibili[i]}}
+                                </p>
+                                <p class="card-tex">Colore:{{p.colori_disponibili[i]}}</p>
+                                <p class="card-tex">Quantità:</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal thank you page-->
+<div class="modal fade" id="thankyou-page" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h1 class="modal-title fs-5 " id="staticBackdropLabel">THANK YOU</h1>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <p>Grazie per aver aquistato sul nostro sito!</p>
+
+            </div>
+            <div class="modal-footer ">
+
+                <i class="bi bi-instagram" style="font-size: 25px;"></i>
+                <i class="bi bi-facebook" style="font-size: 25px;"></i>
+                <i class="bi bi-twitter" style="font-size: 25px;"></i>
+
+                <a class="btn btn-dark" href="#" role="button">Torna alla Home</a>
+
+            </div>
+        </div>
+    </div>
+</div>
