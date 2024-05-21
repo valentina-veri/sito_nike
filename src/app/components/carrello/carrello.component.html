@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="prodottiAggiunti.length>=1">
 
     <div class="row mt-5">
         <div class="col-lg-8">
@@ -8,7 +8,8 @@
                     <div class="row">
                         <div class="col-sm-12 col-lg-6 mt-3">
                             <div class="card">
-                                <img [src]="p.immagine" class="card-img-top" alt="...">
+                                <a [routerLink]="['/dettaglio-scarpa', p.id]"><img [src]="p.immagine" class="card-img-top" alt="..."></a>
+                                
                             </div>
                         </div>
                         <div class="col-sm-12 col-lg-6 mt-3">
@@ -22,13 +23,14 @@
                                     Taglia:{{p.taglie_disponibili[i]}}
                                 </p>
                                 <p class="card-tex">Colore:{{p.colori_disponibili[i]}}</p>
-                                <p class="card-tex">Quantità:</p>        
-                                <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="quantita[i]">                                  
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
-                                <button type="button" class="btn btn-danger mt-3"><i class="bi bi-trash" (click)="eliminaScarpa(i)"></i></button>
+                                <p class="card-tex">Quantità:</p>
+            
+                                <input [(ngModel)]="p.quantity" min="1"
+                                    type="number" value="1" name="quantita" class="form-control w-25"
+                                    >
+                                <p class="card-tex mt-3">subtotale: {{p.prezzo*p.quantity|currency:'EUR'}}</p>
+                                <button type="button" class="btn btn-danger mt-3"><i class="bi bi-trash"
+                                        (click)="eliminaScarpa(i)"></i></button>
                             </div>
                         </div>
                     </div>
@@ -49,9 +51,19 @@
                     <p>Gratis</p>
                     <p>{{costoTotale()|currency:'EUR'}}</p>
                 </div>
-                <a class="btn btn-dark" routerLink="/checkout" role="button" data-bs-dismiss="modal">Pagamento</a>
+                <a class="btn btn-dark" role="button" data-bs-dismiss="modal" (click)="pagamento()">Pagamento</a>
             </div>
         </div>
     </div>
 
+</div>
+
+<!--carrello vuoto-->
+
+<div class="d-flex justify-content-center" *ngIf="prodottiAggiunti.length<=0">
+    <div class="row">
+        <h4 class="text-center">Il tuo carrello è vuoto!</h4>
+        <h6 class="text-center">Aggungi prodotti al carrello</h6>
+        <button class="btn btn-dark" routerLink="/lista-scarpe">shop now</button>
+    </div>
 </div>

@@ -16,9 +16,9 @@ export class CheckoutComponent {
   buttonSpedizione: boolean = false
   buttonRitiro: boolean = false
   salvaEContinua: boolean = false
-
   prodottiAggiunti: Prodotto[] = []
-  quantita: number[] = []
+  totale: any
+  speseConsegna: number = 5
 
   constructor(private cs: CarrelloService) { }
 
@@ -40,7 +40,7 @@ export class CheckoutComponent {
     })
 
     this.prodottiAggiunti = this.cs.getCarrello()
-    this.quantitaSelezionata()
+    this.totale = JSON.parse(localStorage.getItem('totale') as any)
   }
 
   sceltaSpedizione() {
@@ -57,20 +57,8 @@ export class CheckoutComponent {
     this.salvaEContinua = false
   }
 
-  quantitaSelezionata() {
-    //this.quantita = this.prodottiAggiunti.map(() => 1)
-    this.quantita = []
-    for (let i = 0; i < this.prodottiAggiunti.length; i++) {
-      this.quantita.push(1)
-    }
-  }
-
-  costoTotale() {
-    let totale= 0
-    for (let i = 0; i < this.prodottiAggiunti.length; i++) {
-      totale += this.prodottiAggiunti[i].prezzo * this.quantita[i]
-    }
-    return totale
+  pagamentoEffettuato() {
+    this.cs.svuotaCarrello()
   }
 
 }

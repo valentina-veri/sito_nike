@@ -16,22 +16,28 @@
 
             <div class="mt-5">
                 <h5 class="margin">Seleziona il colore</h5>
-                <ul class="row" [ngClass]="{'bordoRosso':messaggioSpanColore}">
-                    <li class="col-lg-4" *ngFor="let colore of scarpa.colori_disponibili, let i=index" (click)="selezionaColore(i)" [ngClass]="{'scelta':IndexColore==i}">{{colore}}</li>
+                <ul class="row">
+                    <li class="col-lg-4" *ngFor="let colore of scarpa.colori_disponibili, let i=index"
+                        (click)="selezionaColore(i)" [ngClass]="{'scelta':IndexColore==i}">{{colore}}</li>
                 </ul>
                 <span class="messaggioErrore" *ngIf="messaggioSpanColore">Seleziona un colore</span>
             </div>
 
             <div class="mt-5">
                 <h5 class="margin">Seleziona la taglia</h5>
-                <ul class="row" [ngClass]="{'bordoRosso':messaggioSpanTaglia}">
-                    <li class="col-lg-4" *ngFor="let taglia of scarpa.taglie_disponibili, let i= index" (click)="selezionaTaglia(i)" [ngClass]="{'scelta':IndexTaglia==i}">{{taglia}}</li>
+                <ul class="row" >
+                    <li class="col-lg-4" *ngFor="let taglia of scarpa.taglie_disponibili, let i= index"
+                        (click)="selezionaTaglia(i)" [ngClass]="{'scelta':IndexTaglia==i}">{{taglia}}</li>
                 </ul>
                 <span class="messaggioErrore" *ngIf="messaggioSpanTaglia">Seleziona la taglia</span>
             </div>
             <div class="d-grid gap-2 mt-3 mb-3">
-                <button class="btn btn-dark margin" type="button" data-bs-toggle="modal" data-bs-target="#popup" (click)="aggiungiAlCarrello()">
+                <button class="btn btn-dark margin" type="button" data-bs-toggle="modal" data-bs-target="#popup"
+                    (click)="aggiungiAlCarrello()">
                     Aggiungi al carrello</button>
+            </div>
+            <div class="d-grid gap-2 mt-3 mb-3">
+                <button type="button" class="btn btn-dark margin" (click)="aggiungiAiPreferiti()">Aggiungi ai preferiti <i class="bi bi-heart"></i></button>
             </div>
         </div>
 
@@ -40,7 +46,8 @@
 
 
 <!--Modal -->
-<div *ngIf="tagliaSelezionata&&coloreSelezionato" class="modal fade" id="popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div *ngIf="tagliaSelezionata&&coloreSelezionato" class="modal fade" id="popup" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -62,15 +69,16 @@
                                 <p class="card-tex">{{scarpa.
                                     prezzo |
                                     currency:"EUR"}}</p>
-                                    <p class="card-tex">Colore: {{scarpa.colori_disponibili[IndexColore]}}</p>
-                                    <p class="card-tex">Taglia: {{scarpa.taglie_disponibili[IndexTaglia]}}</p>               
+                                <p class="card-tex">Colore: {{scarpa.colori_disponibili[IndexColore]}}</p>
+                                <p class="card-tex">Taglia: {{scarpa.taglie_disponibili[IndexTaglia]}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-dark" routerLink="/carrello" role="button" data-bs-dismiss="modal">Visualizza carrello</a>
+                <a class="btn btn-dark" routerLink="/carrello" role="button" data-bs-dismiss="modal">Visualizza
+                    carrello</a>
                 <a class="btn btn-dark" routerLink="/checkout" role="button" data-bs-dismiss="modal">Pagamento</a>
             </div>
         </div>

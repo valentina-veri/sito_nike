@@ -65,47 +65,56 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Outlet</a>
         </li>
+        <li class="nav-item">
+          <button type="button" class="btn btn-info mr-3" (click)="logout()">Logout</button>
+        </li>
       </ul>
-        <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#Modal"> <i class="bi bi-search"></i> Cerca</button>
-      <a class="d-none d-lg-block" href=""><i style="font-size: 25px;" class="bi bi-heart" id="cuore"></i></a>
-      <a class="d-none d-lg-block" routerLink="/carrello"><i style="font-size: 25px;" class="bi bi-bag"></i></a>
+      <div>
+      <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#Modal"> <i
+          class="bi bi-search"></i> Cerca</button>
+      <a routerLink="/preferiti"><i style="font-size: 25px;" class="bi bi-heart"
+          id="cuore"></i></a>
+      <a routerLink="/carrello"><i style="font-size: 25px;" class="bi bi-bag"></i></a>
+    </div>
     </div>
   </div>
 </nav>
 
 <!--Modal  -->
-<div class="modal fade" id="Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Cerca per nome</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="svuotaInput()"></button>
       </div>
       <div class="modal-body">
-        
-          <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search" [(ngModel)]="termineRicerca" (input)="filtraProdotti()">
-        
+
+        <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search"
+          [(ngModel)]="termineRicerca" (input)="filtraProdotti()">
+
         <div class="container mt-3" *ngIf="termineRicerca.length>0">
           <div class="row">
-              <div class="col-sm-12 col-lg-4 mb-3" *ngFor="let p of prodottiFiltrati">
-                  <a [routerLink]="['/dettaglio-scarpa', p.id]" data-bs-dismiss="modal" (click)="svuotaInput()">
-                      <div class="card h-100">
-                          <img [src]="p.immagine" class="card-img-top" alt="...">
-                          <div class="card-body">
-                              <h5 class="card-title">{{p.nome}}</h5>
-                              <p class="card-text">{{p.categoria}}</p>
-                              <p id="best-seller" class="card-text" *ngIf="p.best_seller>=4"><strong> BEST
-                                      SELLER</strong>
-                              </p>
-                              <i class="bi bi-star-fill" *ngIf="p.nuovo_arrivi==true"></i>
-                              <p class="card-text">{{p.descrizione}}</p>
-                              <p class="card-tex">{{p.prezzo | currency:"EUR"}}</p>
-                          </div>
-                      </div>
-                  </a>
-              </div>
+            <div class="col-sm-12 col-lg-4 mb-3" *ngFor="let p of prodottiFiltrati">
+              <a [routerLink]="['/dettaglio-scarpa', p.id]" data-bs-dismiss="modal" (click)="svuotaInput()">
+                <div class="card h-100">
+                  <img [src]="p.immagine" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{p.nome}}</h5>
+                    <p class="card-text">{{p.categoria}}</p>
+                    <p id="best-seller" class="card-text" *ngIf="p.best_seller>=4"><strong> BEST
+                        SELLER</strong>
+                    </p>
+                    <i class="bi bi-star-fill" *ngIf="p.nuovo_arrivi==true"></i>
+                    <p class="card-text">{{p.descrizione}}</p>
+                    <p class="card-tex">{{p.prezzo | currency:"EUR"}}</p>
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
-      </div>
+        </div>
       </div>
     </div>
   </div>

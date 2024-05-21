@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Prodotto } from '../../model/model';
 import { ProdottiService } from '../../services/prodotti.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -14,12 +15,16 @@ prodotti:Prodotto[]=[]
 prodottiFiltrati:Prodotto[]=[]
 termineRicerca:string=''
 
-
-constructor(private ps: ProdottiService){}
+constructor(private ps: ProdottiService, private as:AuthService, private router:Router){}
 
 ngOnInit(): void{
-  this.ps.getProdotti().subscribe(dati => 
-    this.prodotti = dati)
+  this.ps.getProdotti().subscribe({
+    next: (dati) => {
+    this.prodotti = dati},
+    error:(errore)=>{
+      alert(errore)
+    }
+  })
 }
 
 filtraProdotti(){
@@ -28,6 +33,11 @@ filtraProdotti(){
 
 svuotaInput(){
   this.termineRicerca=''
+}
+
+logout() {
+  this.as.logout()
+  this.router.navigate([''])
 }
 
 

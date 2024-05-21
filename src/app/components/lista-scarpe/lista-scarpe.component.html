@@ -10,7 +10,7 @@
                             data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                             aria-controls="panelsStayOpen-collapseOne">
                             Fascia di prezzo
-                        </button>
+                        </button>                  
                     </h2>
                     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                         <div class="accordion-body">
@@ -48,13 +48,6 @@
                     </h2>
                     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
                         <div class="accordion-body">
-                            <!-- <div class="row row-cols-3">
-                                <div class="col" *ngFor="let c of listaColori()">
-                                   <button type="button" role="checkbox" class="btn colori" (click)="scarpeFiltratePerColore(c)">
-                                        <img [src]="'assets/img/'+c+'.png'" alt="">
-                                        <span>{{c}}</span>
-                                    </button>
-                                </div>-->
                             <div class="form-check" *ngFor="let c of listaColori();let i= index">
                                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck{{i}}"
                                     [(ngModel)]="checkBoxColore[i]" (change)="scarpeFiltratePerColore()">
@@ -87,7 +80,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="col-lg-9">
             <div class="row">

@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Prodotto } from '../model/model';
-import { BehaviorSubject, Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarrelloService {
 
+  carrello: Prodotto[] = []
+  
+
   constructor() { this.recuperaCarrello() }
 
-  private carrello: Prodotto[] = []
 
   getCarrello() {
     return this.carrello
@@ -33,9 +35,13 @@ export class CarrelloService {
     }
   }
 
-
-    rimuoviDalCarrello(index: number) {
-      this.carrello.splice(index, 1)
-      this.salvaCarrello()
-    }
+  rimuoviDalCarrello(index: number) {
+    this.carrello.splice(index, 1)
+    this.salvaCarrello()
   }
+
+  svuotaCarrello(){
+    localStorage.clear()
+  }
+
+}

@@ -19,8 +19,12 @@ export class CategorieScarpeComponent {
 
     this.route.paramMap.subscribe(params => {
       this.categoria = params.get('categoria') || '';
-      this.ps.getProdottoByCategoria(this.categoria).subscribe(
-        dati => this.prodotti = dati)
+      this.ps.getProdottoByCategoria(this.categoria).subscribe({
+        next: (dati) => { this.prodotti = dati },
+        error: (errore) => {
+          alert(errore)
+        }
+      })
     })
   }
 }

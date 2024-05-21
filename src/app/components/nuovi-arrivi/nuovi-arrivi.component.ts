@@ -13,10 +13,14 @@ export class NuoviArriviComponent {
 
   constructor(private ps: ProdottiService) { }
 
-  ngOnInit(): void{
-   
-    this.ps.getProdotti().subscribe(dati => this.nuoviArrivi = dati.filter(prodotto =>prodotto.nuovo_arrivi==true))
+  ngOnInit(): void {
+
+    this.ps.getProdotti().subscribe({
+      next: (dati) => { this.nuoviArrivi = dati.filter(prodotto => prodotto.nuovo_arrivi == true) },
+      error: (errore) => {
+        alert(errore)
+      }
+    })
   }
-  
 
 }

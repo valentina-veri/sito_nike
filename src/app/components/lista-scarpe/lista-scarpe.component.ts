@@ -18,15 +18,20 @@ export class ListaScarpeComponent {
   checkBoxCategoria: boolean[] = []
 
   ngOnInit(): void {
-    this.ps.getProdotti().subscribe(dati => {
-      this.prodotti = dati;
-      this.scarpeFiltratePerPrezzo();
-      this.scarpeFiltratePerColore();
-      this.scarpeFiltrateperCategoria()
-    });
+    this.ps.getProdotti().subscribe({
+      next: (dati) => {
+        this.prodotti = dati;
+        this.scarpeFiltratePerPrezzo();
+        this.scarpeFiltratePerColore();
+        this.scarpeFiltrateperCategoria()
+      },
+      error: (errore) => {
+        alert(errore)
+      }
+    })
   }
 
-  scarpeFiltratePerPrezzo(){
+  scarpeFiltratePerPrezzo() {
 
     if (this.checkBoxPrezzo.some(prezzo => prezzo)) {
       this.prodottiFiltrati = this.prodotti.filter((prodotto) => {
@@ -55,21 +60,21 @@ export class ListaScarpeComponent {
     return Array.from(colori) //restituisce e converte in array il set
   }
 
+
   scarpeFiltratePerColore() {
+    const coloriSelezionati = this.listaColori().filter((_, index) => this.checkBoxColore[index]);
 
-    if (this.checkBoxColore.some(colore => colore)) { // Verifica se almeno una casella di controllo è selezionata
-      const coloriSelezionati = this.listaColori().filter((colore,index) => this.checkBoxColore[index]);
-      // Ottieni i colori selezionati basati sullo stato delle caselle di controllo
-
+    if (coloriSelezionati.length > 0) {
       this.prodottiFiltrati = this.prodotti.filter(prodotto => {
-        if (coloriSelezionati.includes('multicolor')) {
-          return prodotto.colori_disponibili.some(c => c.includes('/'));
-        } else {
-          return prodotto.colori_disponibili.some(c => coloriSelezionati.includes(c.toLowerCase()));
+        for (let c of prodotto.colori_disponibili) {
+          if (coloriSelezionati.includes('multicolor') ? c.includes('/') : coloriSelezionati.includes(c.toLowerCase())) {
+            return true;
+          }
         }
+        return false;
       });
     } else {
-      this.prodottiFiltrati = this.prodotti; // Nessuna casella di controllo selezionata, mostra tutti i prodotti
+      this.prodottiFiltrati = this.prodotti;
     }
   }
 
@@ -81,16 +86,13 @@ export class ListaScarpeComponent {
     return Array.from(categorieList)
   }
 
-  scarpeFiltrateperCategoria(){
-    if (this.checkBoxCategoria.some(cat => cat)) {
-      this.prodottiFiltrati = this.prodotti.filter((prodotto) => {
-        for (let i = 0; i < this.checkBoxCategoria.length; i++) {
-          if (this.checkBoxCategoria[i] && prodotto.categoria === this.listaCategorie()[i]) {
-            return true;
-          }
-        }
-        return false;
-      });
+  scarpeFiltrateperCategoria() {
+    const categorieSelezionate = this.listaCategorie().filter((categoria, index) => this.checkBoxCategoria[index]);
+
+    if (categorieSelezionate.length > 0) {
+      this.prodottiFiltrati = this.prodotti.filter(prodotto =>
+        categorieSelezionate.includes(prodotto.categoria)
+      );
     } else {
       this.prodottiFiltrati = this.prodotti;
     }

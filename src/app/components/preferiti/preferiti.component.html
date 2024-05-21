@@ -1,0 +1,27 @@
+<div class="container">
+    
+        <h1>I tuoi preferiti</h1>
+
+    <div class="row">
+
+        <div class="col-sm-12 col-lg-4 mb-3" *ngFor="let p of preferiti">
+
+
+            <div class="card h-100">
+                <a [routerLink]="['/dettaglio-scarpa', p.prodotto.id]"><img [src]="p.prodotto.immagine"
+                        class="card-img-top" alt="..."></a>
+                <div class="card-body">
+                    <h5 class="card-title">{{p.prodotto.nome}}</h5>
+                    <p class="card-text">{{p.prodotto.categoria}}</p>
+                    <p class="card-tex">{{p.prodotto.prezzo|currency:"EUR"}}</p>
+                </div>
+                <div class="d-grid gap-2 d-lg-flex">
+                    <button type="button" class="btn btn-danger" (click)="elimina(p.id)">Elimina</button>
+                    <button class="btn btn-success" type="button" (click)="aggiugniAlCarrello(p.prodotto)">Aggiungi al Carrello</button>
+                  </div>
+                
+            </div>
+        </div>
+    </div>
+    <p class="text-danger mt-5">{{errorMessage}}</p>
+</div>

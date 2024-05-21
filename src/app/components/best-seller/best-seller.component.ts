@@ -14,7 +14,12 @@ export class BestSellerComponent {
   constructor(private ps: ProdottiService) { }
 
   ngOnInit(): void{
-    this.ps.getProdotti().subscribe(dati => this.prodotti = dati.filter(prodotto =>prodotto.best_seller>=4))
+    this.ps.getProdotti().subscribe({
+      next: (dati) => {this.prodotti = dati.filter(prodotto =>prodotto.best_seller>=4)},
+      error: (errore)=>{
+        alert(errore)
+      }
+    })
   }
 
 }

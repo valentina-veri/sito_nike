@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Prodotto } from '../../model/model';
 import { CarrelloService } from '../../services/carrello.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrello',
@@ -9,13 +10,13 @@ import { CarrelloService } from '../../services/carrello.service';
 })
 export class CarrelloComponent {
   prodottiAggiunti: Prodotto[] = []
-  quantita: number[] = []
 
-  constructor(private cs: CarrelloService) { }
+  constructor(private cs: CarrelloService, private router: Router) { }
 
   ngOnInit(): void {
+
     this.prodottiAggiunti = this.cs.getCarrello()
-    this.quantitaSelezionata()
+    this.costoTotale()
   }
 
   eliminaScarpa(index: number) {
@@ -23,22 +24,18 @@ export class CarrelloComponent {
     this.prodottiAggiunti = this.cs.getCarrello()
   }
 
-  quantitaSelezionata() {
-    //this.quantita = this.prodottiAggiunti.map(() => 1)
-    //this.quantita = []
-    for (let i = 0; i < this.prodottiAggiunti.length; i++) {
-      this.quantita.push(1)
-    }
- 
-  }
-
   costoTotale() {
-    let totale= 0
-    for (let i = 0; i < this.prodottiAggiunti.length; i++) {
-      totale += this.prodottiAggiunti[i].prezzo * this.quantita[i]
-    }
-    return totale
+    let prezzoTotale = 0
+    this.prodottiAggiunti.forEach((scarpa: Prodotto) => {
+      prezzoTotale += scarpa.prezzo*scarpa.quantity
+      this.cs.salvaCarrello()
+    })
+    return prezzoTotale
   }
 
+  pagamento() {
+    localStorage.setItem('totale', JSON.stringify(this.costoTotale()))
+    this.router.navigate(['/checkout'])
+  }
 
 }

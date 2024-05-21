@@ -1,0 +1,20 @@
+<p class="text-center mt-5">Effetua il login per accedere alla tua area riservata!</p>
+<div class="d-flex justify-content-center mt-5">
+
+  <form #LaForm="ngForm" (ngSubmit)="login()">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"
+         name="email" [(ngModel)]="model.email" #inputEmail="ngModel" required="">
+         <span class="text-danger" *ngIf="inputEmail.invalid && inputEmail.touched">Campo obbligatorio</span>
+    </div>
+    <label for="inputPassword5" class="form-label">Password</label>
+    <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock"
+       name="password" [(ngModel)]="model.password" #inputPassword="ngModel" required="">
+       <span class="text-danger" *ngIf="inputPassword.invalid && inputPassword.touched">Campo obbligatorio</span>
+    <button class="btn btn-primary mt-3 d-grid gap-2" type="submit">Accedi</button>
+  </form>
+
+</div>
+<p class="text-center text-danger mt-5">{{errorMessage}}</p>
+<p class="text-center mt-5">Se ti mancano le credenziali <a routerLink="/register">registrati</a></p>

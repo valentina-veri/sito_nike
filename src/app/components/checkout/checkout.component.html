@@ -168,7 +168,7 @@
                     </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 mb-3">
                         <button class="btn btn-dark me-md-2" type="submit" [disabled]="pagamento.invalid"
-                            data-bs-toggle="modal" data-bs-target="#thankyou-page">Pagamento</button>
+                            data-bs-toggle="modal" data-bs-target="#thankyou-page" (click)="pagamentoEffettuato()">Pagamento</button>
                     </div>
                 </form>
 
@@ -184,9 +184,9 @@
                 </div>
                 <div class="col-3 text-end">
                     <a routerLink="/carrello">Modifica</a>
-                    <p class="pt-4">{{costoTotale()|currency:'EUR'}}</p>
-                    <p>Gratis</p>
-                    <p>{{costoTotale()|currency:'EUR'}}</p>
+                    <p class="pt-4">{{totale|currency:'EUR'}}</p>
+                    <p>{{speseConsegna|currency:'EUR'}}</p>
+                    <p>{{totale+speseConsegna|currency:'EUR'}}</p>
                 </div>
             </div>
 
@@ -209,7 +209,7 @@
                                     Taglia:{{p.taglie_disponibili[i]}}
                                 </p>
                                 <p class="card-tex">Colore:{{p.colori_disponibili[i]}}</p>
-                                <p class="card-tex">Quantità:</p>
+                                <p class="card-tex">Quantità:{{p.quantity}}</p>
                             </div>
                         </div>
                     </div>

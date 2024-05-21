@@ -14,7 +14,10 @@ import { CategorieScarpeComponent } from './components/categorie-scarpe/categori
 import { NuoviArriviComponent } from './components/nuovi-arrivi/nuovi-arrivi.component';
 import { BestSellerComponent } from './components/best-seller/best-seller.component';
 import { CarrelloComponent } from './components/carrello/carrello.component';
-import { CheckoutComponent } from './components/checkout/checkout.component'
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { PreferitiComponent } from './components/preferiti/preferiti.component'
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { CheckoutComponent } from './components/checkout/checkout.component'
     NuoviArriviComponent,
     BestSellerComponent,
     CarrelloComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    RegisterComponent,
+    LoginComponent,
+    PreferitiComponent
   ],
   imports: [
     BrowserModule,
